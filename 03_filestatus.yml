@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    playbook: 
+      name: 01_filestatus.yml
+  tasks:
+    - name: Start role filestatus 
+      include_role:
+        name: filestatus 
+        tasks_from: main
+...
+

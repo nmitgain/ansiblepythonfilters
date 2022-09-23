@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    playbook: 
+      name: 01_list2inclause.yml
+  tasks:
+    - name: Start role list2inclause 
+      include_role:
+        name: list2inclause 
+        tasks_from: main
+...
+

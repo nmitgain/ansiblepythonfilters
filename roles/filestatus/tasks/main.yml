@@ -1,0 +1,36 @@
+---
+- name: Get File Stats
+  stat:
+    path: "{{ external_file }}"
+  register: filestat
+  failed_when: 1 == 2
+
+- name: Debug filestat
+  debug:
+    var: filestat
+
+- name: Debug Isodate
+  debug:
+    msg: "{{ filestat.stat.mtime | epoch2isodate }}"
+
+
+- name: Get linecount
+  shell: wc -l {{ external_file }} | cut -d " " -f 1
+  register: linecount
+  changed_when: 1 == 2
+  when:           # only run with regular files
+      - filestat.stat.isreg is defined
+      - filestat.stat.isreg | bool
+
+- name: Store linecount in Var. Set Default 0
+  set_fact: 
+    numlines: "{{ linecount.stdout | default(0) }}"
+    mylabel: IDUGCHECK
+
+- name: Call filter with parameters and print line per server
+  debug: 
+    msg: "{{ filestat | mtime_size(inventory_hostname, numlines, mylabel) }}"
+
+
+ 
+...

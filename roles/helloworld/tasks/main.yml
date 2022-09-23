@@ -1,0 +1,5 @@
+---
+- name: Hello World
+  debug:
+    msg: "{{ inventory_hostname | helloworld }}"
+...

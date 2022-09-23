@@ -1,0 +1,4 @@
+inventory/all.yml
+inventory/group_vars/*
+ansible.cfg
+*.pyc
