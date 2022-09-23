@@ -1,0 +1,5 @@
+---
+- name: Debug List
+  debug:
+    msg: "SELECT stuff from somewhere where something in {{ elements | list2inclause }}"    
+...
